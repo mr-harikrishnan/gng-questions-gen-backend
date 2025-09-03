@@ -1,0 +1,140 @@
+questions:
+
+[
+  {
+    "_id": "68b69171491778056fae8561",
+    "question": "sdffdsre",
+    "image": "https://res.cloudinary.com/dqrwx8lem/image/upload/v1756792678/zlglmk2zopa1rnjlygzw.png",
+    "code": "Write your Code...",
+    "subject": "Science",
+    "topic": "Physics",
+    "tags": ["sdfs"],
+    "explanation": "sdgfdsf",
+    "questionsType": "ntq",
+    "min": 18,
+    "max": 60,
+    "options": [],
+    "publised":false
+  },
+  {
+    "_id": "68b69314ac695867bd5cce76",
+    "question": "sdffdsre",
+    "image": "https://res.cloudinary.com/dqrwx8lem/image/upload/v1756792678/zlglmk2zopa1rnjlygzw.png",
+    "code": "Write your Code...",
+    "subject": "Science",
+    "topic": "Physics",
+    "tags": ["sdfs"],
+    "explanation": "sdgfdsf",
+    "questionsType": "mcq",
+    "options": [
+      {"option": "Option A text", "mark": 10, "isCorrect": true, "_id": "68b69314ac695867bd5cce77"},
+      {"option": "Option B text", "mark": 0, "isCorrect": false, "_id": "68b69314ac695867bd5cce78"},
+      {"option": "Option C text", "mark": 0, "isCorrect": false, "_id": "68b69314ac695867bd5cce79"},
+      {"option": "Option D text", "mark": 0, "isCorrect": false, "_id": "68b69314ac695867bd5cce7a"},
+      {"option": "Option E text", "mark": 0, "isCorrect": false, "_id": "68b69314ac695867bd5cce7b"}
+    ],
+    "publised":true
+  },
+  {
+    "_id": "68b6931eac695867bd5cce7d",
+    "question": "sdffdsre",
+    "image": "https://res.cloudinary.com/dqrwx8lem/image/upload/v1756792678/zlglmk2zopa1rnjlygzw.png",
+    "code": "Write your Code...",
+    "subject": "Science",
+    "topic": "Physics",
+    "tags": ["sdfs"],
+    "explanation": "sdgfdsf",
+    "questionsType": "msq",
+    "options": [
+      {"option": "Option A text", "mark": 10, "isCorrect": true, "_id": "68b6931eac695867bd5cce7e"},
+      {"option": "Option B text", "mark": 10, "isCorrect": true, "_id": "68b6931eac695867bd5cce7f"},
+      {"option": "Option C text", "mark": 10, "isCorrect": true, "_id": "68b6931eac695867bd5cce80"},
+      {"option": "Option D text", "mark": 10, "isCorrect": true, "_id": "68b6931eac695867bd5cce81"},
+      {"option": "Option E text", "mark": 10, "isCorrect": true, "_id": "68b6931eac695867bd5cce82"}
+    ],
+    "publised":false
+  },
+  {
+    "_id": "68b69327ac695867bd5cce84",
+    "question": "sdffdsre",
+    "image": "https://res.cloudinary.com/dqrwx8lem/image/upload/v1756792678/zlglmk2zopa1rnjlygzw.png",
+    "code": "Write your Code...",
+    "subject": "Science",
+    "topic": "Physics",
+    "tags": ["sdfs"],
+    "explanation": "sdgfdsf",
+    "questionsType": "mcqImage",
+    "options": [
+      {"option": "https://res.cloudinary.com/dqrwx8lem/image/upload/v1756792678/zlglmk2zopa1rnjlygzw.png", "mark": 10, "isCorrect": true, "_id": "68b69327ac695867bd5cce85"},
+      {"option": "https://res.cloudinary.com/dqrwx8lem/image/upload/v1756792678/zlglmk2zopa1rnjlygzw.png", "mark": 0, "isCorrect": false, "_id": "68b69327ac695867bd5cce86"},
+      {"option": "https://res.cloudinary.com/dqrwx8lem/image/upload/v1756792678/zlglmk2zopa1rnjlygzw.png", "mark": 0, "isCorrect": false, "_id": "68b69327ac695867bd5cce87"},
+      {"option": "https://res.cloudinary.com/dqrwx8lem/image/upload/v1756792678/zlglmk2zopa1rnjlygzw.png", "mark": 0, "isCorrect": false, "_id": "68b69327ac695867bd5cce88"},
+      {"option": "https://res.cloudinary.com/dqrwx8lem/image/upload/v1756792678/zlglmk2zopa1rnjlygzw.png", "mark": 0, "isCorrect": false, "_id": "68b69327ac695867bd5cce89"}
+    ],
+    "publised":false
+  },
+  {
+    "_id": "68b6932eac695867bd5cce8b",
+    "question": "sdffdsre",
+    "image": "https://res.cloudinary.com/dqrwx8lem/image/upload/v1756792678/zlglmk2zopa1rnjlygzw.png",
+    "code": "Write your Code...",
+    "subject": "Science",
+    "topic": "Physics",
+    "tags": ["sdfs"],
+    "explanation": "sdgfdsf",
+    "questionsType": "msqImage",
+    "options": [
+      {"option": "https://res.cloudinary.com/dqrwx8lem/image/upload/v1756792678/zlglmk2zopa1rnjlygzw.png", "mark": 10, "isCorrect": true, "_id": "68b6932eac695867bd5cce8c"},
+      {"option": "https://res.cloudinary.com/dqrwx8lem/image/upload/v1756792678/zlglmk2zopa1rnjlygzw.png", "mark": 10, "isCorrect": true, "_id": "68b6932eac695867bd5cce8d"},
+      {"option": "https://res.cloudinary.com/dqrwx8lem/image/upload/v1756792678/zlglmk2zopa1rnjlygzw.png", "mark": 10, "isCorrect": true, "_id": "68b6932eac695867bd5cce8e"},
+      {"option": "https://res.cloudinary.com/dqrwx8lem/image/upload/v1756792678/zlglmk2zopa1rnjlygzw.png", "mark": 10, "isCorrect": true, "_id": "68b6932eac695867bd5cce8f"},
+      {"option": "https://res.cloudinary.com/dqrwx8lem/image/upload/v1756792678/zlglmk2zopa1rnjlygzw.png", "mark": 10, "isCorrect": true, "_id": "68b6932eac695867bd5cce90"},
+      {"option": "https://res.cloudinary.com/dqrwx8lem/image/upload/v1756792678/zlglmk2zopa1rnjlygzw.png", "mark": 10, "isCorrect": true, "_id": "68b6932eac695867bd5cce91"}
+    ],
+    "publised":true
+  },
+  {
+    "_id": "68b69336ac695867bd5cce93",
+    "question": "sdffdsre",
+    "image": "https://res.cloudinary.com/dqrwx8lem/image/upload/v1756792678/zlglmk2zopa1rnjlygzw.png",
+    "code": "Write your Code...",
+    "subject": "Science",
+    "topic": "Physics",
+    "tags": ["sdfs"],
+    "explanation": "sdgfdsf",
+    "questionsType": "ntq",
+    "min": 18,
+    "max": 60,
+    "options": [],
+    "publised":false
+  },
+  {
+    "_id": "68b69518ac695867bd713559",
+    "question": "what is start patterns?",
+    "image": "https://res.cloudinary.com/dqrwx8lem/image/upload/v1756796004/sxuol3wn8wr9jdivhcik.png",
+    "code": "for(let i=0;i<5;i++){\nconsole.log(\"*\")\n}",
+    "subject": "Problem Solving",
+    "topic": "Patterns",
+    "tags": ["problemSolving","javascript","pattern"],
+    "explanation": "make js and python and c++",
+    "questionsType": "mcq",
+    "options": [
+      {"option": "it is looping concepts", "mark": 0, "isCorrect": false, "_id": "68b69518ac695867bd71355a"},
+      {"option": "it is design", "mark": 0, "isCorrect": false, "_id": "68b69518ac695867bd71355b"},
+      {"option": "it mind game", "mark": 0, "isCorrect": false, "_id": "68b69518ac695867bd71355c"},
+      {"option": "it is problem solving skills", "mark": 10, "isCorrect": true, "_id": "68b69518ac695867bd71355d"}
+    ],
+    "publised":false
+  }
+]
+
+
+
+
+
+subjectAndTopics:
+
+{
+    "subject":"Science",
+    "topics":["foorloop","array","something","andsomethings"]
+}
