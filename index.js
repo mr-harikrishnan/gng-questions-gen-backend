@@ -1,13 +1,19 @@
 const express = require("express")
 const app = express()  //1
 const cors = require("cors") //2
+const { createMultiPartUpload,
+    createPreSignedUrl,
+    completeMultiPartUpload } = require("./lib")
+
+
 app.use(cors(["http://localhost:5173/"])) //for front end 
 const mongoose = require("mongoose")
 mongoose.connect("mongodb://localhost:27017/questions_db")
 const { Question } = require("./models/question")
 const { SubjectAndTopics } = require("./models/subject_and_topics")
 
-app.use(express.json()) //body la vara datava directahh req ku send pannu json type la
+app.use(express.json()) 
+
 
 // ------------------------------------
 
@@ -72,7 +78,7 @@ app.delete("/question/:id", async (req, res) => {
 });
 
 
-// -------------
+// ---------------------------------------------
 // POST - Create a new subject with topics
 app.post("/subjectandtopics", async (req, res) => {
   try {
@@ -138,6 +144,51 @@ app.delete("/subjectandtopics/:id", async (req, res) => {
     res.status(500).json({ message: "Something went wrong" });
   }
 });
+
+// --------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.post("/start-multi-part-upload", async (req, res) => {
+    try {
+        const uploadData= await createMultiPartUpload(req.body)
+        res.json(uploadData)
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({error:"some thing went wrong"})
+    }
+})
+
+app.post("/get-pre-signed-url", async (req, res) => {
+    try {
+        const url=await createPreSignedUrl(req.body)
+        res.json(url)
+    } catch (error) {
+            console.log(error)
+            res.status(500).json({error:"some thing went wrong"})
+    }
+})
+
+app.post("/complete-multi-part-upload", async (req, res) => {
+    try {
+        const data=await completeMultiPartUpload(req.body)
+        res.json(data)
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({error:"somethings went wrong"})
+    }
+})
+
 
 
 app.listen(3000)
