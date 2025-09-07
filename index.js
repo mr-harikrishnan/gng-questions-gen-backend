@@ -1,24 +1,52 @@
-const express = require("express")
-const app = express()  //1
-const cors = require("cors") //2
-const { createMultiPartUpload,
-    createPreSignedUrl,
-    completeMultiPartUpload } = require("./lib")
+const dotenv = require("dotenv")
+dotenv.config();
+const SECRET_KEY = process.env.SECRET_KEY;
+
+const express = require("express");
+const app = express(); //1
+const cors = require("cors"); //2
+const { createMultiPartUpload, createPreSignedUrl, completeMultiPartUpload } = require("./lib");
+
+const { User } = require("./models/user");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
+const mongoose = require("mongoose");
+mongoose.connect("mongodb://localhost:27017/questions_db");
+
+const { Question } = require("./models/question");
+const { SubjectAndTopics } = require("./models/subject_and_topics");
+
+app.use(cors(["http://localhost:5173/"])); //for front end
+app.use(express.json());
+
+function authenticate(req, res, next) {
+  try {
+    if (req.headers.authorization) {
+      let payload = jwt.verify(req.headers.authorization, SECRET_KEY)
+      if (payload) {
+        next()
+      }
+      else {
+        res.status(401).json({ message: "jwt wrong Unauthorized" })
+      }
+    }
+    else {
+      res.status(401).json({ message: "not permission api Unauthorized" })
+    }
+  } catch (error) {
+    console.log(error)
+    res.status(401).json({ message: "not permission api Unauthorized" })
+
+  }
 
 
-app.use(cors(["http://localhost:5173/"])) //for front end 
-const mongoose = require("mongoose")
-mongoose.connect("mongodb://localhost:27017/questions_db")
-const { Question } = require("./models/question")
-const { SubjectAndTopics } = require("./models/subject_and_topics")
-
-app.use(express.json()) 
-
+}
 
 // ------------------------------------
 
 
-app.post("/questions", async function (req, res) {
+app.post("/questions",  async function (req, res) {
   try {
     let question = new Question(req.body)
     await question.save()
@@ -54,7 +82,7 @@ app.get("/questions/:id", async (req, res) => {
 });
 
 // PUT - Update a question by ID
-app.put("/question/:id", async (req, res) => {
+app.put("/question/:id",authenticate, async (req, res) => {
   try {
     const updatedQuestion = await Question.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!updatedQuestion) return res.status(404).json({ message: "Question not found" });
@@ -151,44 +179,75 @@ app.delete("/subjectandtopics/:id", async (req, res) => {
 
 
 
-
-
-
-
-
-
-
-
 app.post("/start-multi-part-upload", async (req, res) => {
-    try {
-        const uploadData= await createMultiPartUpload(req.body)
-        res.json(uploadData)
-    } catch (error) {
-        console.log(error)
-        res.status(500).json({error:"some thing went wrong"})
-    }
+  try {
+    const uploadData = await createMultiPartUpload(req.body)
+    res.json(uploadData)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ error: "some thing went wrong" })
+  }
 })
 
 app.post("/get-pre-signed-url", async (req, res) => {
-    try {
-        const url=await createPreSignedUrl(req.body)
-        res.json(url)
-    } catch (error) {
-            console.log(error)
-            res.status(500).json({error:"some thing went wrong"})
-    }
+  try {
+    const url = await createPreSignedUrl(req.body)
+    res.json(url)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ error: "some thing went wrong" })
+  }
 })
 
 app.post("/complete-multi-part-upload", async (req, res) => {
-    try {
-        const data=await completeMultiPartUpload(req.body)
-        res.json(data)
-    } catch (error) {
-        console.log(error)
-        res.status(500).json({error:"somethings went wrong"})
-    }
+  try {
+    const data = await completeMultiPartUpload(req.body)
+    res.json(data)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ error: "somethings went wrong" })
+  }
 })
 
 
+// ------------------------------------------------------------
 
+app.post("/register", async function (req, res) {
+  try {
+    const salt = bcrypt.genSaltSync(10)
+    const hash = bcrypt.hashSync(req.body.password, salt)
+    req.body.password = hash;
+    const user = new User(req.body)
+    await user.save()
+    res.json({ message: "users registerd" })
+
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ message: "something went wrong" })
+  }
+})
+
+
+app.post('/login', async function (req, res) {
+  try {
+    let user = await User.findOne({ email: req.body.email })
+    if (user) {
+      let passwordCorrect = bcrypt.compareSync(req.body.password, user.password)
+      if (passwordCorrect) {
+        //gen token
+        let token = jwt.sign({ id: user._id, name: user.name }, SECRET_KEY, { expiresIn: "1h" })
+        res.json({ token })
+
+      } else {
+        res.status(401).json({ message: "password wrong" })
+      }
+    } else {
+      res.status(401).json({ message: "User not found" })
+    }
+
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ message: "Something went wrong" })
+  }
+})
 app.listen(3000)
