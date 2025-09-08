@@ -20,7 +20,7 @@ const mongoose = require("mongoose");
 
 // Middleware
 app.use(cors({
-  origin: "https://gng-questions-gen-frontend.vercel.app/" // frontend URL
+  origin: "https://gng-questions-gen-frontend.vercel.app" // frontend URL
 }));
 app.use(express.json());
 
