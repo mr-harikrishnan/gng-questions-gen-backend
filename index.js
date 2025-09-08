@@ -1,24 +1,46 @@
-const dotenv = require("dotenv")
+// Load environment variables
+const dotenv = require("dotenv");
 dotenv.config();
+
+// Configs from .env
 const SECRET_KEY = process.env.SECRET_KEY;
+const ATLAS_URL = process.env.ATLAS_URL; // make sure in .env it is exactly ATLAS_URL
 
+// 3️⃣ Imports
 const express = require("express");
-const app = express(); //1
-const cors = require("cors"); //2
+const app = express();
+const cors = require("cors");
 const { createMultiPartUpload, createPreSignedUrl, completeMultiPartUpload } = require("./lib");
-
 const { User } = require("./models/user");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-
-const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost:27017/questions_db");
-
 const { Question } = require("./models/question");
 const { SubjectAndTopics } = require("./models/subject_and_topics");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const mongoose = require("mongoose");
 
-app.use(cors(["http://localhost:5173/"])); //for front end
+// Middleware
+app.use(cors({
+  origin: "http://localhost:5173" // frontend URL
+}));
 app.use(express.json());
+
+// Mongo Atlas connection (safe)
+
+// mongoose.connect("mongodb://localhost:27017/questions_db", {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true
+// })
+mongoose.connect(ATLAS_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+  .then(() => console.log("MongoDB Atlas connected successfully!"))
+  .catch(err => console.error("MongoDB connection error:", err));
+
+// 6Start server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
 
 function authenticate(req, res, next) {
   try {
@@ -46,7 +68,7 @@ function authenticate(req, res, next) {
 // ------------------------------------
 
 
-app.post("/questions",  async function (req, res) {
+app.post("/questions", async function (req, res) {
   try {
     let question = new Question(req.body)
     await question.save()
@@ -82,7 +104,7 @@ app.get("/questions/:id", async (req, res) => {
 });
 
 // PUT - Update a question by ID
-app.put("/question/:id",authenticate, async (req, res) => {
+app.put("/question/:id", authenticate, async (req, res) => {
   try {
     const updatedQuestion = await Question.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!updatedQuestion) return res.status(404).json({ message: "Question not found" });
