@@ -23,7 +23,7 @@ async function createMultiPartUpload(payload) {
     try {
         const multiPartParams = {
             Bucket: S3_BUCKET,
-            Key: `Harikrishnan/questionsGen/${payload.questionsType}/${payload.fileKey}`
+            Key: `Harikrishnan/questionsGen/${payload.questionId}/${payload.fileKey}`
         }
         const command = new CreateMultipartUploadCommand(multiPartParams);
         const multiPartUploadData = await s3.send(command)
@@ -42,7 +42,7 @@ async function createPreSignedUrl(payload) {
     try {
         const multiPartUrlParams = {
             Bucket: S3_BUCKET,
-            Key: `Harikrishnan/questionsGen/${payload.questionsType}/${payload.fileKey}`,
+            Key: `Harikrishnan/questionsGen/${payload.questionId}/${payload.fileKey}`,
             UploadId: payload.fileId,
             PartNumber: payload.partNumber
         };
@@ -62,7 +62,7 @@ async function completeMultiPartUpload(payload) {
         let sortedParts = payload.parts.sort((a, b) => a.PartNumber - b.PartNumber);
         const multiPartParams = {
             Bucket: S3_BUCKET,
-            Key: `Harikrishnan/questionsGen/${payload.questionsType}/${payload.fileKey}`,
+            Key: `Harikrishnan/questionsGen/${payload.questionId}/${payload.fileKey}`,
             UploadId: payload.fileId,
             MultipartUpload: {
                 Parts: sortedParts

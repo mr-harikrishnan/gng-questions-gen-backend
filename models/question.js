@@ -1,11 +1,15 @@
 const mongoose = require("mongoose");
 
 const QuestionSchema = new mongoose.Schema({
+
+  questionId: {
+    type: String,
+  },
   question: {
     type: String,
     required: true
   },
-  published:{
+  published: {
     type: Boolean,
     default: false
   },
