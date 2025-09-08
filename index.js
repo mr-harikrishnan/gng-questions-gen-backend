@@ -18,10 +18,10 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 
-// Middleware
 app.use(cors({
-  origin: "https://gng-questions-gen-frontend.vercel.app" // frontend URL
+  origin: ["http://localhost:5173", "https://gng-questions-gen-frontend.vercel.app"]
 }));
+
 app.use(express.json());
 
 // Mongo Atlas connection (safe)
